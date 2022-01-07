@@ -26,7 +26,7 @@ variable "consul_service_name" {
 variable "version_tag" {
   description = "The docker image version. For options, see https://hub.docker.com/_/nginx"
   type        = string
-  default     = "1.21"
+  default     = "latest"
 }
 
 variable "http_port" {
@@ -42,7 +42,7 @@ variable "resources" {
     memory = number
   })
   default = {
-    cpu    = 200,
-    memory = 256
+    cpu    = 500,
+    memory = 1024
   }
 }
