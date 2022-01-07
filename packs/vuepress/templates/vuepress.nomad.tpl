@@ -1,5 +1,6 @@
-job [[ template "job_name" . ]] {
-  [[ template "region" . ]]
+#vuepress.nomad.tpl
+job "[[ .vuepress.job_name ]]" {
+  region      = "[[ .vuepress.region ]]"
   datacenters = [[ .vuepress.datacenters | toPrettyJson ]]
   // must have linux for network mode
   constraint {
@@ -11,19 +12,19 @@ job [[ template "job_name" . ]] {
     count = 1
     network {
       port "http" {
-        to = [[ .vuepress.http_port ]]
+        to = 8000
       }
     }
 
     service {
-      name = "vuepress"
+      name = "[[ .vuepress.consul_service_name ]]"
       port = "http"
     }
 
-    task "nginx" {
+    task "vuepress" {
       driver = "docker"
       config {
-        image = "172.21.4.51/private/vuepress:[[ .vuepress.version_tag ]]"
+        image = "swbs90/vuepress:[[ .vuepress.version_tag ]]"
         ports = ["http"]
       }
       resources {
