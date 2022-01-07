@@ -24,7 +24,7 @@ job "[[ .vuepress.job_name ]]" {
     task "vuepress" {
       driver = "docker"
       config {
-        image = "swbs90/vuepress:[[ .vuepress.version_tag ]]"
+        image = "172.21.2.51/my-repo/vuepress:[[ .vuepress.version_tag ]]"
         ports = ["http"]
       }
       resources {
